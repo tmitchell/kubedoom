@@ -23,6 +23,13 @@ spec:
           ports:
             - containerPort: 5900
               name: vnc
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "100m"
+            limits:
+              memory: "128Mi"
+              cpu: "1"
         - image: geek1011/easy-novnc@sha256:c79d386dd660533106a65473650fcf5ddc61319d02183f76c0009349d5dd5ee8
           args:
             - --basic-ui
@@ -32,3 +39,10 @@ spec:
           ports:
             - containerPort: 8080
               name: http
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "100m"
+            limits:
+              memory: "128Mi"
+              cpu: "1"
