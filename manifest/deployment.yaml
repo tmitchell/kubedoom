@@ -18,7 +18,7 @@ spec:
     spec:
       serviceAccountName: kubedoom
       containers:
-        - image: ghcr.io/storax/kubedoom:latest
+        - image: ghcr.io/storax/kubedoom@sha256:851ba8c80b93cd518e06111a17bca12c40ade062d727cad21e4a690779dd5445
           env:
             - name: NAMESPACE
               value: default
