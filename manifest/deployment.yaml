@@ -16,7 +16,6 @@ spec:
       labels:
         app: kubedoom
     spec:
-      hostNetwork: true
       serviceAccountName: kubedoom
       containers:
         - image: ghcr.io/storax/kubedoom:latest

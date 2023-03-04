@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: kubedoom
+  name: kubedoom
+  namespace: kubedoom
+spec:
+  selector:
+    app: kubedoom
+  ports:
+    - name: vnc
+      port: 59
+      protocol: TCP
+      targetPort: 5900
+  type: LoadBalancer
