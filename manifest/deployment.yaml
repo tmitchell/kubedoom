@@ -19,10 +19,16 @@ spec:
       serviceAccountName: kubedoom
       containers:
         - image: ghcr.io/storax/kubedoom@sha256:851ba8c80b93cd518e06111a17bca12c40ade062d727cad21e4a690779dd5445
-          env:
-            - name: NAMESPACE
-              value: default
           name: kubedoom
           ports:
             - containerPort: 5900
               name: vnc
+        - image: geek1011/easy-novnc@sha256:c79d386dd660533106a65473650fcf5ddc61319d02183f76c0009349d5dd5ee8
+          args:
+            - --basic-ui
+            - --verbose
+            - --no-url-password
+          name: easy-novnc
+          ports:
+            - containerPort: 8080
+              name: http
