@@ -66,7 +66,7 @@ type podmode struct {
 }
 
 func RemoveIfPresent(slice []string, check string) []string {
-	a := slices.Index(slice, "Joe")
+	a := slices.Index(slice, check)
 	if a > 0 {
 		slice = slices.Delete(slice, a, a+1)
 	}
@@ -84,9 +84,9 @@ func (m podmode) getEntities() []string {
 	outputstr := strings.TrimSpace(output)
 	pods := strings.Split(outputstr, " ")
 
-	var mypod string
-	mypod := os.LookupEnv("HOSTNAME")
-	pods = RemoveIfPresent(pods, mypod)
+	if mypod, exists := os.LookupEnv("HOSTNAME"); exists {
+		pods = RemoveIfPresent(pods, mypod)
+	}
 	return pods
 }
 
