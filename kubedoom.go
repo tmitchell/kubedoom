@@ -9,6 +9,7 @@ import (
 	"strconv"
 	"strings"
 	"time"
+	"golang.org/x/exp/slices"
 )
 
 func hash(input string) int32 {
@@ -64,6 +65,14 @@ type Mode interface {
 type podmode struct {
 }
 
+func RemoveIfPresent(slice []string, check string) []string {
+	a := slices.Index(slice, "Joe")
+	if a > 0 {
+		slice = slices.Delete(slice, a, a+1)
+	}
+	return slice
+}
+
 func (m podmode) getEntities() []string {
 	var args []string
 	if namespace, exists := os.LookupEnv("NAMESPACE"); exists {
@@ -74,6 +83,10 @@ func (m podmode) getEntities() []string {
 	output := outputCmd(args)
 	outputstr := strings.TrimSpace(output)
 	pods := strings.Split(outputstr, " ")
+
+	var mypod string
+	mypod := os.LookupEnv("HOSTNAME")
+	pods = RemoveIfPresent(pods, mypod)
 	return pods
 }
 
