@@ -1,7 +1,9 @@
-FROM golang:1.17-alpine AS build-kubedoom
+FROM golang:1.19-alpine AS build-kubedoom
 WORKDIR /go/src/kubedoom
 ADD go.mod .
 ADD kubedoom.go .
+RUN go get golang.org/x/exp/slices
+RUN go install golang.org/x/exp/slices
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o kubedoom .
 
 FROM ubuntu:22.04 AS build-essentials
