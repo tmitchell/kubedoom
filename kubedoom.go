@@ -86,7 +86,9 @@ func (m podmode) getEntities() []string {
 
 	if mypod, exists := os.LookupEnv("HOSTNAME"); exists {
 		pods = RemoveIfPresent(pods, mypod)
+		log.Printf("Hiding pod: %v", mypod)
 	}
+	log.Printf("Could not match pod to hide.")
 	return pods
 }
 
