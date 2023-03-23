@@ -13,10 +13,12 @@ which was forked from psdoom.
 
 ## Running Locally
 
-In order to run locally you will need to
+In order to build/run locally you will need to
 
-1. Run the kubedoom container
-2. Attach a VNC client to the appropriate port (5901)
+1. Update `ib_creds.yaml` with your Iron Bank credentials
+2. Run a bunch of targets in the Makefile in the right order
+3. Wait for k8s to do its thing
+4. Load https://kubedoom.bigbang.dev
 
 ### With Docker
 
