@@ -23,7 +23,7 @@ In order to run locally you will need to
 Run `ghcr.io/storax/kubedoom:latest` with docker locally:
 
 ```console
-$ docker run -p5901:5900 \
+docker run -p5901:5900 \
   --net=host \
   -v ~/.kube:/root/.kube \
   --rm -it --name kubedoom \
@@ -37,7 +37,7 @@ Optionally, if you set `-e NAMESPACE={your namespace}` you can limit Kubedoom to
 Run `ghcr.io/storax/kubedoom:latest` with podman locally:
 
 ```console
-$ podman run -it -p5901:5900/tcp \
+podman run -it -p5901:5900/tcp \
   -v ~/.kube:/tmp/.kube --security-opt label=disable \
   --env "KUBECONFIG=/tmp/.kube/config" --name kubedoom
   ghcr.io/storax/kubedoom:latest
@@ -47,7 +47,7 @@ $ podman run -it -p5901:5900/tcp \
 
 Now start a VNC viewer and connect to `localhost:5901`. The password is `idbehold`:
 ```console
-$ vncviewer viewer localhost:5901
+vncviewer viewer localhost:5901
 ```
 You should now see DOOM! Now if you want to get the job done quickly enter the
 cheat `idspispopd` and walk through the wall on your right. You should be
@@ -62,7 +62,7 @@ them](https://github.com/storax/kubedoom/issues/5). Simply set the `-mode` flag
 to `namespaces`:
 
 ```console
-$ docker run -p5901:5900 \
+docker run -p5901:5900 \
   --net=host \
   -v ~/.kube:/root/.kube \
   --rm -it --name kubedoom \
@@ -77,7 +77,9 @@ See the example in the `/manifest` directory. You can quickly test it using
 example config from this repository:
 
 ```console
-$ kind create cluster --config kind-config.yaml
+kind create cluster --config kind-config.yaml
+```
+```console
 Creating cluster "kind" ...
  ✓ Ensuring node image (kindest/node:v1.23.0) 🖼
  ✓ Preparing nodes 📦 📦
@@ -99,7 +101,7 @@ the worker node. Then run kubedoom inside the cluster by applying the manifest
 provided in this repository:
 
 ```console
-$ kubectl apply -k manifest/
+kubectl apply -k manifest/
 namespace/kubedoom created
 deployment.apps/kubedoom created
 serviceaccount/kubedoom created
@@ -108,7 +110,7 @@ clusterrolebinding.rbac.authorization.k8s.io/kubedoom created
 
 To connect run:
 ```console
-$ vncviewer viewer localhost:5900
+vncviewer viewer localhost:5900
 ```
 
 Kubedoom requires a service account with permissions to list all pods and delete
@@ -121,7 +123,7 @@ specify your systems architecture as the `TARGETARCH` build argument. For
 example `amd64` or `arm64`.
 
 ```console
-$ docker build --build-arg=TARGETARCH=amd64 -t kubedoom .
+docker build --build-arg=TARGETARCH=amd64 -t kubedoom .
 ```
 
 To change the default VNC password, use `--build-arg=VNCPASSWORD=differentpw`.
