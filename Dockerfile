@@ -1,4 +1,4 @@
-FROM golang:1.17-alpine AS build-kubedoom
+FROM golang:1.20-alpine AS build-kubedoom
 WORKDIR /go/src/kubedoom
 ADD go.mod .
 ADD kubedoom.go .
